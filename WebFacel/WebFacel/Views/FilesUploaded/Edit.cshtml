@@ -1,0 +1,303 @@
+﻿@{
+    ViewBag.Title = "Información detallada del Archivo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="hidden">
+    <input type="hidden" id="txtError" value="@ViewBag.Error" />
+    <input type="hidden" id="txtUrlRoot" value="@ViewBag.AppUrl" />
+    <input type="hidden" id="txtModel" value="@ViewBag.Model" />
+    <input type="hidden" id="FileDetailId" />
+</div>
+
+<div class="container" style="margin:5px; border:1px solid white" ng-app="EditFilesDetailApp" ng-controller="EditFilesDetailCtrl" ng-init="isProcessing=false">
+    <div class="row" style="height:40px"></div>
+    <div class="card">
+
+        <div class="card-header bg-beige">
+            <div class="row">
+                <div class="col-sm-10 text-left">
+                    <h3>@ViewBag.Title</h3>
+                </div>
+                
+                <div class="col-sm-2 text-right">
+                    <a href="#" ng-click="saveRecord()" class="btn btn-success btn-sm"><i class="fa fa-save"></i></a>
+                    <a href="#" ng-click="gotoIndex()" class="btn btn-success btn-sm"><i class="fa fa-backward"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <ul id="ultabs" class="nav nav-tabs">
+                <li class="nav-item"><a href="" data-target="#infoUploadDiv" data-toggle="tab" class="nav-link small active">Upload del Archivo</a></li>
+                <li class="nav-item"><a href="" data-target="#infoStatusDiv" data-toggle="tab" class="nav-link small">Estado del Archivo</a></li>
+                <li class="nav-item"><a href="" data-target="#infoDownloadDiv" data-toggle="tab" class="nav-link small">Información del Download</a></li>
+                <li class="nav-item"><a href="" data-target="#infoErroresDiv" data-toggle="tab" class="nav-link small">Inconsistencia o error</a></li>
+            </ul>
+
+            <div id="tabsContent" class="tab-content">
+                <div id="infoUploadDiv" class="tab-pane active show">
+                    <div class="card">
+                        <div class="card-header">Información del archivo Cargado</div>
+                    </div>
+
+                    <div class="card-body">
+                        <fieldset>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">companyId</span>
+                                </div>
+                                <input id="companyId" type="text" class="form-control" required ng-model="curModel.companyId">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">fileName</span>
+                                </div>
+                                <input id="fileName" type="text" class="form-control" required ng-model="curModel.fileName">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">fileData</span>
+                                </div>
+                                <input id="fileData" type="text" class="form-control" required ng-model="curModel.fileData">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">datetimeUpd</span>
+                                </div>
+                                <input id="datetimeUpd" type="text" class="form-control" required ng-model="curModel.datetimeUpd">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">statusUpd</span>
+                                </div>
+                                <input id="statusUpd" type="text" class="form-control" required ng-model="curModel.statusUpd">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">transactionId</span>
+                                </div>
+                                <input id="transactionId" type="text" class="form-control" ng-model="curModel.transactionId">
+                            </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div id="infoStatusDiv" class="tab-pane">
+                    <div class="card">
+                        <div class="card-header">Información del Estado del archivo</div>
+                    </div>
+
+                    <div class="card-body">
+                        <fieldset>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">processName</span>
+                                </div>
+                                <input id="processName" type="text" class="form-control" ng-model="curModel.processName">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">processStatus</span>
+                                </div>
+                                <input id="processStatus" type="text" class="form-control" ng-model="curModel.processStatus">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">processDate</span>
+                                </div>
+                                <input id="processDate" type="text" class="form-control" ng-model="curModel.processDate">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">messageType</span>
+                                </div>
+                                <input id="messageType" type="text" class="form-control" ng-model="curModel.messageType">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">legalStatus</span>
+                                </div>
+                                <input id="legalStatus" type="text" class="form-control" ng-model="curModel.legalStatus">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">documentPrefix</span>
+                                </div>
+                                <input id="documentPrefix" type="text" class="form-control" ng-model="curModel.documentPrefix">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">resourceType</span>
+                                </div>
+                                <input id="resourceType" type="text" class="form-control" ng-model="curModel.resourceType">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">documentType</span>
+                                </div>
+                                <input id="documentType" type="text" class="form-control" ng-model="curModel.documentType">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">documentNumber</span>
+                                </div>
+                                <input id="documentNumber" type="text" class="form-control" ng-model="curModel.documentNumber">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">senderIdentificaton</span>
+                                </div>
+                                <input id="senderIdentificaton" type="text" class="form-control" ng-model="curModel.senderIdentificaton">
+                            </div>
+
+                        </fieldset>
+                    </div>
+
+                </div>
+
+                <div id="infoDownloadDiv" class="tab-pane">
+                    <div class="card">
+                        <div class="card-header">Información del archivo Descargado</div>
+                    </div>
+
+                    <div class="card-body">
+                        <fieldset>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">statusDown</span>
+                                </div>
+                                <input id="statusDown" type="text" class="form-control" ng-model="curModel.statusDown">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">downloadData</span>
+                                </div>
+                                <input id="downloadData" type="text" class="form-control" ng-model="curModel.downloadData">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">datetimeDown</span>
+                                </div>
+                                <input id="datetimeDown" type="text" class="form-control" ng-model="curModel.datetimeDown">
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div id="infoErroresDiv" class="tab-pane">
+                    <div class="card">
+                        <div class="card-header">Información de error ocurrido en el Proceso</div>
+                    </div>
+
+                    <div class="card-body">
+                        <fieldset>
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">faultCode</span>
+                                </div>
+                                <input id="faultCode" type="text" class="form-control" ng-model="curModel.faultCode">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">faultString</span>
+                                </div>
+                                <input id="faultString" type="text" class="form-control" ng-model="curModel.faultString">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">statusCode</span>
+                                </div>
+                                <input id="statusCode" type="text" class="form-control" ng-model="curModel.statusCode">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">reasonPhrase</span>
+                                </div>
+                                <input id="reasonPhrase" type="text" class="form-control" ng-model="curModel.reasonPhrase">
+                            </div>
+
+                            <div class="input-group mb-3 input-group-sm">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text labelWidth">errorMessage</span>
+                                </div>
+                                <input id="errorMessage" type="text" class="form-control" ng-model="curModel.errorMessage">
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-footer text-center">
+            <p><span id="lblError" class="LabelError">{{Error}}</span></p>
+        </div>
+
+    </div>
+
+    <div id="divProcessing" class="row text-center" ng-show="isProcessing">
+        <p>Por favor espere...<img src="~/img/ajax-loader.gif" /></p>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        var urlRoot = $("#txtUrlRoot").val(); //URL para realizar llamadas a metodos desde jquery
+        var errorMsg = $("#txtError").val();  //Mensaje de Error al cargar la pagina
+        var app = angular.module('EditFilesDetailApp', []);
+
+        app.controller('EditFilesDetailCtrl', function ($scope, $window, $http) {
+            $scope.curModel = JSON.parse($("#txtModel").val());
+            $scope.Error = errorMsg;
+            $scope.isProcessing = false;
+
+            $scope.gotoIndex = function () {
+                gotoView(urlRoot + "/FilesDetail/Index/");
+            };
+
+            $scope.saveRecord = function () {
+                var jsonResult = {};
+                var titleError = "Error al Guardar FilesDetail";
+                $scope.Error = requiredValidateControls("FileDetailId,companyId,fileName,fileData,datetimeUpd,statusUpd");
+
+                if ($scope.Error.length == 0) {
+                    var url = urlRoot + "/FilesDetail/Update";
+                    $scope.isProcessing = true;
+
+                    $http.post(url, { model: $scope.curModel })
+                        .then(function (response) {
+                            jsonResult = response.data;
+
+                            $scope.Error = jsonResult.Error;
+                            $scope.isProcessing = false;
+                        }, function error(response) {
+                            showError(titleError, response.statusText);
+                            $scope.isProcessing = false;
+                        }
+                        );
+                };
+            };
+        });
+    </script>
+}

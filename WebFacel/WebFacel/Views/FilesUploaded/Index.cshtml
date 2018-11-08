@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Listado de FilesDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .dropdown-toggle::after {
+        display: none;
+    }
+</style>
+
+<div class="hidden">
+    <input type="hidden" id="txtError" value="@ViewBag.Error" />
+    <input type="hidden" id="txtUrlRoot" value="@ViewBag.AppUrl" />
+    <input type="hidden" id="txtDataModel" value="@ViewBag.DataModel" />
+</div>
+
+<div class="container" style="margin:5px; border:1px solid white">
+    <div class="row" style="height:40px"></div>
+
+    <div class="card">
+        <div class="card-header bg-beige">
+            <div class="row">
+                <div class="col-sm-10 text-left">
+                    <h3>@ViewBag.Title</h3>
+                </div>
+
+                <div class="col-sm-2 text-right">
+                    <a href="#" ng-click="edit(0)" class="btn btn-success btn-sm"><i class="fa fa-plus-square"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="scroll_content">
+                <table id="tblLists"
+                       class="table table-striped table-hover"
+                       data-paging="true"
+                       data-sorting="true"
+                       data-filtering="true"
+                       data-empty="No hay registros"
+                       data-filter-placeholder="Texto de búsqueda"
+                       data-toggle-column="last">
+                    <thead>
+                        <tr>
+                            <th data-visible="false" data-name="FileDetailId">ID</th>
+                            <th data-name="fileName">Nombre archivo</th>
+                            <th data-name="datetimeUpd">Fecha carga</th>
+                            <th data-name="statusUpd">Estado carga</th>
+                            <th data-name="processName">Nombre proceso</th>
+                            <th data-name="processStatus">Estado proceso</th>
+                            <th data-name="processDate">Fecha proceso</th>
+                            <th data-name="messageType" data-breakpoints="xs">Tipo mensaje</th>
+                            <th data-name="documentType" data-breakpoints="xs">Tipo doc</th>
+                            <th data-name="documentNumber" data-breakpoints="xs">Nro doc</th>
+                            <th data-hide="all" data-name="Command" data-filterable="false" data-sortable="false">Comandos</th>
+                        </tr>
+                    </thead>
+
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-footer text-center">
+            <div class="formRow">
+                <p><span id="lblError" class="LabelError"></span></p>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="divProcessing" class="row text-center">
+        <p>Por favor espere...<img src="~/img/ajax-loader.gif" /></p>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        var urlRoot = $("#txtUrlRoot").val(); //URL para realizar llamadas a metodos desde jquery
+        var errorMsg = $("#txtError").val();  //Mensaje de Error al cargar la pagina
+
+        $(document).ready(function () {
+            var dataModel = JSON.parse($("#txtDataModel").val());
+
+            $("#lblError").text(errorMsg);
+            $('#tblLists').footable({
+                rows: dataModel
+            });
+            $("#divProcessing").hide();
+        });
+
+        function edit(id) {
+            gotoView(urlRoot + "/FilesDetail/Edit/" + id);
+        };
+    </script>
+}
+

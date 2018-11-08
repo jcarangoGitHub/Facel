@@ -1,0 +1,1 @@
+﻿print("Hello Python! I am from .NET world")

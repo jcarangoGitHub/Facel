@@ -1,0 +1,13 @@
+E:\julio.arango\Desarrollo\07-Facel\LibFacel\bin\Debug\DBE.Net.Facel.LibFacel.dll
+E:\julio.arango\Desarrollo\07-Facel\LibFacel\bin\Debug\DBE.Net.Facel.LibFacel.pdb
+E:\julio.arango\Desarrollo\07-Facel\LibFacel\obj\Debug\LibFacel.csprojAssemblyReference.cache
+E:\julio.arango\Desarrollo\07-Facel\LibFacel\obj\Debug\LibFacel.csproj.CoreCompileInputs.cache
+E:\julio.arango\Desarrollo\07-Facel\LibFacel\obj\Debug\DBE.Net.Facel.LibFacel.dll
+E:\julio.arango\Desarrollo\07-Facel\LibFacel\obj\Debug\DBE.Net.Facel.LibFacel.pdb
+F:\julio.arango\Desarrollo\07-Facel\LibFacel\bin\Debug\DBE.Net.Facel.LibFacel.dll.config
+F:\julio.arango\Desarrollo\07-Facel\LibFacel\bin\Debug\DBE.Net.Facel.LibFacel.dll
+F:\julio.arango\Desarrollo\07-Facel\LibFacel\bin\Debug\DBE.Net.Facel.LibFacel.pdb
+F:\julio.arango\Desarrollo\07-Facel\LibFacel\obj\Debug\LibFacel.csprojResolveAssemblyReference.cache
+F:\julio.arango\Desarrollo\07-Facel\LibFacel\obj\Debug\DBE.Net.Facel.LibFacel.dll
+F:\julio.arango\Desarrollo\07-Facel\LibFacel\obj\Debug\DBE.Net.Facel.LibFacel.pdb
+F:\julio.arango\Desarrollo\07-Facel\LibFacel\bin\Debug\Microsoft.Web.Services3.dll
